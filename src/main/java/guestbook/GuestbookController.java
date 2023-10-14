@@ -97,12 +97,16 @@ class GuestbookController {
 	 */
 	@PostMapping(path = "/guestbook")
 	String addEntry(@Valid @ModelAttribute("form") GuestbookForm form, Errors errors, Model model) {
+		// Save and display email in controller
 
 		if (errors.hasErrors()) {
 			return guestBook(model, form);
 		}
 
 		guestbook.save(form.toNewEntry());
+
+		model.addAttribute("email", form.getEmail());
+
 
 		return "redirect:/guestbook";
 	}

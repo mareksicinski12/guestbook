@@ -49,7 +49,7 @@ class GuestbookForm {
 	 * @param name the value to bind to {@code name}
 	 * @param text the value to bind to {@code text}
 	 */
-	public GuestbookForm(String name, String text, String email) {
+	public GuestbookForm(String name, String text, @Email @NotBlank String email) {
 
 		this.name = name;
 		this.text = text;
