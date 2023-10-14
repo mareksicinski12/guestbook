@@ -28,7 +28,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
+/*
  * The core class to bootstrap our application. It triggers Spring Boot's auto-configuration, component scanning and
  * configuration properties scanning using the {@link SpringBootApplication} convenience annotation. At the same time,
  * this class acts as configuration class to configure additional components (see {@link #init(GuestbookRepository)})
@@ -40,7 +40,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication
 public class Application {
 
-	/**
+	/*
 	 * The main application method, bootstraps the Spring container.
 	 *
 	 * @param args
@@ -49,7 +49,7 @@ public class Application {
 		SpringApplication.run(Application.class, args);
 	}
 
-	/**
+	/*
 	 * Some initializing code to populate our database with some {@link GuestbookEntry}s. Beans of type
 	 * {@link CommandLineRunner} will be executed on application startup which makes them a convenient way to run
 	 * initialization code.
@@ -70,7 +70,7 @@ public class Application {
 		};
 	}
 
-	/**
+	/*
 	 * This class customizes the web and web security configuration through callback methods provided by the
 	 * {@link WebMvcConfigurer} interface.
 	 */
