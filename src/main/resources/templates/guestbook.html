@@ -31,6 +31,7 @@
 							</button>
 						</form>
 						<h4 th:text="${index} + '. ' + ${entry.name}" class="card-title">1. Posting</h4>
+						<p th:text="${entry.email}">Email</p>
 					</div>
 					<div class="card-body">
 						<blockquote class="entrytext" th:text="${entry.text}"></blockquote>
