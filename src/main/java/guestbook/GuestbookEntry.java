@@ -32,7 +32,7 @@ import org.springframework.util.Assert;
  */
 @Entity
 class GuestbookEntry {
-
+//added an email field to the GuestbookEntry entity
 	private @Id @GeneratedValue Long id;
 	private final String name, text;
 	private final LocalDateTime date;
@@ -80,5 +80,7 @@ class GuestbookEntry {
 		return text;
 	}
 
-	public String getEmail() { return email; }
+	public String getEmail() {
+		return email;
+	}
 }
