@@ -15,6 +15,7 @@
  */
 package guestbook;
 
+import jakarta.validation.constraints.Email;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.util.Streamable;
