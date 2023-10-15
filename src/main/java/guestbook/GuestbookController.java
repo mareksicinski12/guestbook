@@ -19,11 +19,17 @@ import io.github.wimdeblauwe.hsbt.mvc.HtmxResponse;
 import io.github.wimdeblauwe.hsbt.mvc.HxRequest;
 import jakarta.validation.Valid;
 
+import guestbook.GuestbookRepository;
+
+import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.util.Assert;
 import org.springframework.validation.Errors;
@@ -43,7 +49,16 @@ import org.springframework.web.server.ResponseStatusException;
 @Controller
 class GuestbookController {
 
+	//@Autowired to inject the repository instance
+
+	/*
+	@Autowired
+	private  GuestbookRepository repository;
+	*/
+
 	private final GuestbookRepository guestbook;
+
+
 
 	/**
 	 * Creates a new {@link GuestbookController} using the given {@link GuestbookRepository}. Spring will look for a bean
@@ -85,6 +100,20 @@ class GuestbookController {
 		return "guestbook";
 	}
 
+	/*
+	@GetMapping(path ="/guestbook")
+	public String list(Model model) {
+		String name = "some name";
+		Sort sort = Sort.by("name");
+		List<GuestbookEntry> entries = repository.findAllByOrderByNameAsc(name, sort);
+
+		model.addAttribute("entries", entries);
+
+		return "guestbook";
+	}
+	*/
+
+
 	/**
 	 * Handles requests to create a new {@link GuestbookEntry}. Spring MVC automatically validates and binds the HTML form
 	 * to the {@code form} parameter. Validation or binding errors, if any, are exposed via the {@code
@@ -98,14 +127,17 @@ class GuestbookController {
 	@PostMapping(path = "/guestbook")
 	String addEntry(@Valid @ModelAttribute("form") GuestbookForm form, Errors errors, Model model) {
 		// Save and display email in controller
+		String email = form.getEmail();
 
 		if (errors.hasErrors()) {
 			return guestBook(model, form);
 		}
 
+		GuestbookEntry entry = new GuestbookEntry(form.getName(), email, form.getText());
+
 		guestbook.save(form.toNewEntry());
 
-		model.addAttribute("email", form.getEmail());
+		model.addAttribute("email", email);
 
 
 		return "redirect:/guestbook";
