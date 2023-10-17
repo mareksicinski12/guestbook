@@ -37,7 +37,7 @@ class GuestbookForm {
 	*/
 	private final @NotBlank String text;
 
-	private final @NotBlank String email;
+	private final @NotBlank @Email String email;
 
 	/**
 	 * Creates a new {@link GuestbookForm} with the given name and text. Spring Framework will use this constructor to
@@ -88,6 +88,8 @@ class GuestbookForm {
 	public String getEmail() {
 		return email;
 	}
+
+
 	GuestbookEntry toNewEntry() {
 		return new GuestbookEntry(getName(), getText(), getEmail());
 	}

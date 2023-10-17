@@ -133,6 +133,24 @@ class GuestbookController {
 			return guestBook(model, form);
 		}
 
+		//If the email is NOT valid, handle the invalid case
+
+		/*
+		if (!form.isValidEmail(email)) {
+			errors.rejectValue("email", "invalid");
+		}
+		*/
+
+
+		/*
+		if (!email.contains("@")) {
+			model.addAttribute("emailError", "Email must contain @ symbol");
+			return guestBook(model, form);
+		}
+
+		*/
+
+
 		GuestbookEntry entry = new GuestbookEntry(form.getName(), email, form.getText());
 
 		guestbook.save(form.toNewEntry());

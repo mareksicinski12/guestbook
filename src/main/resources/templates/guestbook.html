@@ -1,5 +1,6 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/extras/spring-security" xmlns:hx="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 		<script th:src="@{/webjars/htmx.org/dist/htmx.min.js}"></script>
@@ -19,7 +20,7 @@
 
 		<br />
 
-		<div id="entries" class="mx-auto">			
+		<div id="entries" class="mx-auto">
 			<div th:each="entry, it : ${entries}" th:with="index = ${it.count}" th:fragment="entries">
 				<div class="card" th:fragment="entry" th:id="entry+${entry.id}">
 					<div class="card-header">
@@ -46,17 +47,20 @@
 		<form method="post" role="form" class="gb-form" id="form" hx:post="@{/guestbook}" hx-target="#entries" hx-swap="beforeend" _="on entryAdded me.reset()" th:action="@{/guestbook}" th:object="${form}">
 			<div class="form-group">
 				<label for="name" th:text="#{guestbook.form.name}">Name</label><br /> 
-				<input class="form-control" type="text" th:field="*{name}" th:errorclass="is-invalid" required="required" />
+				<input id="name" class="form-control" type="text" th:field="*{name}" th:errorclass="is-invalid" required="required" />
 				<div th:if="${#fields.hasErrors('name')}" class="invalid-feedback" th:text="#{guestbook.form.name.required}">Please provide a name.</div> 
 			</div>
 			<div class="form-group">
 				<label for="email" th:text="#{guestbook.form.email }">Email</label><br />
-				<input class="form-control" type="text" th:field="*{email}" th:errorclass="is-invalid" required="required" />
+				<input id="email" class="form-control" type="text" th:field="*{email}" th:errorclass="is-invalid" required="required" />
 				<div th:if="${#fields.hasErrors('email')}" class="invalid-feedback" th:text="#{guestbook.form.email.required}">Please provide an email.</div>
+				<div th:if="${#fields.hasErrors('email') and #fields.errors('email')[0].contains('@')}">
+					<span th:text="#{guestbook.form.email.atSymbolRequired}">Email must contain the @ symbol</span>
+				</div>
 			</div>
 			<div class="form-group">
 				<label for="text" th:text="#{guestbook.form.text}">Text</label><br /> 
-				<textarea th:field="*{text}" th:errorclass="is-invalid" class="form-control" required="required"></textarea>
+				<textarea id="text" th:field="*{text}" th:errorclass="is-invalid" class="form-control" required="required"></textarea>
 				<div th:if="${#fields.hasErrors('text')}" class="invalid-feedback" th:text="#{guestbook.form.text.required}">Please provide a text.</div>
 			</div>
 			<input type="submit" class="btn btn-secondary" th:value="#{guestbook.form.submit}" value="Senden" />
