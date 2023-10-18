@@ -3,6 +3,10 @@ div#entries, #form {
 	width: 50%;
 }
 
+.main-content {
+	background-color: sandybrown;
+}
+
 .card {
 	margin-bottom: 2em;
 }
