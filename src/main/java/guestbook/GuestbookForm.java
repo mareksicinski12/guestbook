@@ -36,8 +36,8 @@ class GuestbookForm {
 	not be the empty string (i.e. it must have at least one character)
 	*/
 	private final @NotBlank String text;
-
-	private final @NotBlank @Email String email;
+	@NotBlank
+	private final  String email;
 
 	/**
 	 * Creates a new {@link GuestbookForm} with the given name and text. Spring Framework will use this constructor to
